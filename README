@@ -1,0 +1,59 @@
+MyProxy
+A proxy that can make connections based on web page names 
+and rewrite html connections, modify content, and record logs.
+by Tian Luan 
+2021-5-9
+
+----- Environments --------------------------------------------------------------------
+
+This proxy is based on:
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
+
+----- Using ---------------------------------------------------------------------------
+
+Usage: java MyProxy [Host name of the website] [Local Port]
+MyProxy will read two parameters, the first is the hostname of the target website,
+the second is the local port which you want to use. if no parameter are entered,
+the default settings is HostName: www.bom.gov.au and Local Port: 3310
+After run this proxy, you can go to browser and type localhost: [Local Port] into
+browser to access the target website now. This proxy cannot read file directly but
+use a bash shell could input the parameter hostname from files.
+
+----- Using Example --------------------------------------------------------------------
+
+First type following line in the terminal:
+java MyProxy www.bom.gov.au 1234
+Second open the browser and type following line in the browser:
+localhost:1234
+
+----- Note -----------------------------------------------------------------------------
+
+The Request are all use HTTP/1.0 and all tests are on Firefox browser, the Canberra will
+be replaced by LasVegas.
+The proxy will output the log in the terminal and also record the log in the STDOUT 
+doucment, which is in the same directory as the program, the format of the logs is:
+
+---- STDOUT START ----
+Timestamp of Request: 
+Request:
+Response Status:
+Rewrite links: 
+Rewrite Cities: 
+---- STDOUT END ------
+
+Note that the Request here is the request that comes into my proxy, as received. So some
+request are HTTP/1.1 but when I send them to the server I will rewrite them as HTTP/1.0
+
+If the program cannot excute, please use "javac MyProxy.java" to compile the code and
+run it again. Source code is "MyProxy.java".
+
+Please note that sometimes (very rarely) there is the problem with java.net.SocketException,
+presumably due to a problem with the server actively disconnecting from a slow connection 
+that has not been accessed for a long time, but due to limited time the bug has not been fixed, 
+if the problem occurs please use another port and re-run the program and access target website 
+again from your browser. There is also the problem that the program can only be forced to 
+terminate via the command line and the termination command has not yet been refined due to time limited.
+
+Finally, thank you for reading and using!
